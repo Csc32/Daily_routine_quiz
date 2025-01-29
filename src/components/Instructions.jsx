@@ -1,7 +1,7 @@
 // src/components/Instructions.jsx
 export function Instructions({ onHideInstructions }) {
 	return (
-		<div className="bg-white p-6 rounded-lg shadow-md border border-primary-100 max-w-2xl mx-auto text-center">
+		<div className="bg-white p-6 rounded-lg shadow-md border border-primary-100 max-w-xl mx-auto text-center mt-5">
 			<h2 className="text-2xl font-bold text-primary-800 mb-4">
 				Welcome to the Daily Routine Activity!
 			</h2>
@@ -15,6 +15,10 @@ export function Instructions({ onHideInstructions }) {
 				<li>Click "Show Help" if you need a hint.</li>
 				<li>Click "Check Answers" to see if your answers are correct.</li>
 			</ul>
+			<p className="text-lg text-primary-700 mb-4">
+				When you finish, please take a screenshot 📸 of your result and share it
+				in the group
+			</p>
 			<button
 				onClick={onHideInstructions}
 				className="bg-primary-500 text-white px-6 py-2 rounded-md hover:bg-primary-600 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">

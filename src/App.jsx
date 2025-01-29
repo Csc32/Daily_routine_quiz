@@ -3,16 +3,19 @@ import "./App.css";
 import { Field } from "./components/Field";
 import { DisplayName } from "./components/DisplayName";
 import { DailyRoutineActivity } from "./components/DailyRoutineActivity";
-import { UserProgress } from "./components/UserProgress"; // Import the new component
-import { routineExercises } from "./utils/constants";
+import { UserProgress } from "./components/UserProgress";
 import { Instructions } from "./components/Instructions";
-import { useEffect } from "react";
+import { routineExercises } from "./utils/constants";
 
 function App() {
 	const [name, setName] = useState("");
 	const [submittedName, setSubmittedName] = useState("");
 	const [feedbacks, setFeedbacks] = useState({});
-	const [showInstructions, setShowInstructions] = useState(true); // State to control instructions visibility
+	const [showInstructions, setShowInstructions] = useState(true);
+
+	const hideInstructions = () => {
+		setShowInstructions(false);
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -54,22 +57,17 @@ function App() {
 		}));
 	};
 
-	// Hide instructions and show the activity
-	const hideInstructions = () => {
-		setShowInstructions(false);
+	const onReset = () => {
+		setSubmittedName("");
+		setFeedbacks({}); // Reset feedbacks to an empty object
 	};
-
-	useEffect(() => {
-		window.scrollTo({ top: 0, behavior: "smooth" });
-	}, [feedbacks]);
 
 	return (
 		<section className="bg-primary-100 flex flex-col justify-start items-center gap-5 min-h-52 grow-1">
-			{/* Show Instructions if showInstructions is true */}
 			{showInstructions && (
 				<Instructions onHideInstructions={hideInstructions} />
 			)}
-			{/* Show the rest of the app if showInstructions is false */}
+
 			{!showInstructions && (
 				<>
 					<section className="flex flex-col">
@@ -84,17 +82,16 @@ function App() {
 							/>
 						) : (
 							<section className="flex flex-row gap-5 justify-center items-center">
-								<DisplayName submittedName={submittedName}></DisplayName>
+								<DisplayName submittedName={submittedName} />
 								<button
 									className="text-white bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 mt-5"
-									onClick={() => setSubmittedName(false)}>
+									onClick={onReset}>
 									Reset
 								</button>
 							</section>
 						)}
 					</section>
 
-					{/* Display User Progress */}
 					{submittedName && (
 						<UserProgress submittedName={submittedName} feedbacks={feedbacks} />
 					)}
