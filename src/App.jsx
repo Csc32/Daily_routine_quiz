@@ -6,10 +6,12 @@ import { DailyRoutineActivity } from "./components/DailyRoutineActivity";
 import { UserProgress } from "./components/UserProgress";
 import { Instructions } from "./components/Instructions";
 import { routineExercises } from "./utils/constants";
-
+import { useEffect } from "react";
+import confetti from "canvas-confetti";
 function App() {
 	const [name, setName] = useState("");
 	const [submittedName, setSubmittedName] = useState("");
+	const [isVisible, setIsVisible] = useState(false);
 	const [feedbacks, setFeedbacks] = useState({});
 	const [showInstructions, setShowInstructions] = useState(true);
 
@@ -34,6 +36,7 @@ function App() {
 					className: "mt-2 text-emerald-600 font-medium",
 				},
 			}));
+			confetti();
 			return;
 		}
 		setFeedbacks((prev) => ({
@@ -61,7 +64,9 @@ function App() {
 		setSubmittedName("");
 		setFeedbacks({}); // Reset feedbacks to an empty object
 	};
-
+	useEffect(() => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	}, [feedbacks]);
 	return (
 		<section className="bg-primary-100 flex flex-col justify-start items-center gap-5 min-h-52 grow-1">
 			{showInstructions && (
