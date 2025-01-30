@@ -35,7 +35,7 @@ export function DailyRoutineActivity({ checkAnswer, showHelp, feedbacks }) {
 					key={exercise.id}
 					className="bg-white p-6 rounded-lg shadow-md border border-primary-100 w-xl min-h-[28vh]">
 					<div className="flex items-center gap-4 mb-4">
-						<img className="size-10" src={exercise.image} alt={exercise.alt} />
+						<img className="size-20" src={exercise.image} alt={exercise.alt} />
 						<span className="text-xl font-medium text-primary-700">
 							{`What do you do in the ${exercise.time}?`}
 						</span>
